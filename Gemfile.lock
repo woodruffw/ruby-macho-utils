@@ -1,0 +1,15 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ruby-macho (1.0.0)
+    slop (4.4.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  ruby-macho
+  slop (~> 4.4)
+
+BUNDLED WITH
+   1.14.4
