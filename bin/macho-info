@@ -1,0 +1,73 @@
+#!/usr/bin/env ruby
+
+require "macho"
+require "slop"
+
+def macho_info(macho)
+  puts "FILE INFORMATION:"
+  puts "\tHeader type: #{macho.header.class}"
+  puts "\tMagic: #{macho.magic_string}"
+  puts "\tFiletype: #{macho.filetype}"
+  puts "\tCPU type: #{macho.cputype}"
+  puts "\tCPU subtype: #{macho.cpusubtype}"
+  puts "\tNo. load commands: #{macho.ncmds}"
+  puts "\tSize of load commands: #{macho.sizeofcmds}"
+  puts "\tFlags: #{macho.flags}"
+  puts "\tAlignment: #{macho.alignment}"
+
+  puts "\nLOAD COMMANDS:"
+  macho.load_commands.each do |lc|
+    puts "\t#{lc} (#{lc.class}) (offset: #{lc.offset}, size: #{lc.cmdsize})"
+  end
+
+  puts "\nDYLIB ID: #{macho.dylib_id}" if macho.dylib?
+
+  puts "\nDYNAMIC LIBRARIES:"
+  macho.dylib_load_commands.each do |lc|
+    puts "\t#{lc.name.to_s} (#{lc.type})"
+  end
+
+  puts "\nSEGMENTS AND SECTIONS:"
+
+  macho.segments.each do |seg|
+    puts "\tSegment: #{seg.segname} " \
+         "(offset: #{seg.fileoff}, size: #{seg.filesize})"
+
+    seg.sections.each do |sect|
+      puts "\t\tSection: #{sect.section_name} " \
+           "(offset: #{sect.offset}, size: #{sect.size})"
+    end
+  end
+end
+
+opts = Slop.parse do |o|
+  o.banner = <<~EOS
+    Dump metadata and information in the given Mach-O binary.
+
+    Usage:
+      macho-info [--first-only] <file>
+  EOS
+  o.bool "-f", "--first-only", "only dump the first slice in a fat binary"
+  o.on "-h", "--help", "print this help message" do
+    puts o
+    exit
+  end
+end
+
+filename = opts.args.shift || abort("I need a file to dump.")
+
+macho_file = MachO.open(filename)
+
+if macho_file.is_a?(MachO::FatFile)
+  macho_slices = macho_file.machos
+else
+  macho_slices = [macho_file]
+end
+
+if opts.first_only?
+  macho_info(macho_slices.first)
+else
+  macho_slices.each do |macho|
+    macho_info(macho)
+  end
+end
