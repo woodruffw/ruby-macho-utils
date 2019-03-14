@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Gem::Specification.new do |s|
   s.name = "ruby-macho-utils"
   s.version = "0.0.1"
@@ -11,5 +13,4 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/Homebrew/ruby-macho"
   s.license = "MIT"
   s.add_runtime_dependency "ruby-macho", "~> 1.0"
-  s.add_runtime_dependency "slop", "~> 4.4"
 end
