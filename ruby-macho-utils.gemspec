@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = "ruby-macho-utils"
-  s.version = "0.0.1"
+  s.version = "0.1.0"
   s.summary = "ruby-macho-utils - Command line utils for ruby-macho."
   s.description = "A collection of command line utilities for use with ruby-macho."
   s.authors = ["William Woodruff"]
