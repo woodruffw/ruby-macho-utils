@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.files = Dir["LICENSE", "README.md"]
   s.executables = Dir["bin/*"].map { |p| File.basename(p) }
   s.required_ruby_version = ">= 2.3.0"
-  s.homepage = "https://github.com/Homebrew/ruby-macho"
+  s.homepage = "https://github.com/woodruffw/ruby-macho-utils"
   s.license = "MIT"
   s.add_runtime_dependency "ruby-macho", "~> 1.0"
 end
