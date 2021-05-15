@@ -1,4 +1,4 @@
 source "https://rubygems.org"
 
 gem "ruby-macho"
-gem "slop", "~> 4.8"
+gem "slop", "~> 4.9"
