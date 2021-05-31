@@ -2,7 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     ruby-macho (2.5.1)
-    slop (4.9.0)
+    slop (4.9.1)
 
 PLATFORMS
   ruby
