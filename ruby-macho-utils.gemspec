@@ -12,5 +12,5 @@ Gem::Specification.new do |s|
   s.required_ruby_version = ">= 2.3.0"
   s.homepage = "https://github.com/woodruffw/ruby-macho-utils"
   s.license = "MIT"
-  s.add_runtime_dependency "ruby-macho", "~> 2.2"
+  s.add_runtime_dependency "ruby-macho", ">= 2.2", "< 4.0"
 end
